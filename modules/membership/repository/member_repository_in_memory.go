@@ -19,6 +19,7 @@ func (r *MemberRepositoryInMemory) Save(m *model.Member) <-chan error {
 	go func() {
 		member, ok := r.db[m.ID]
 		if !ok {
+			m.Version++
 			r.db[m.ID] = m
 			output <- nil
 			return

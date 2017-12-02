@@ -32,6 +32,7 @@ func TestMemberRepositoryInMemory(t *testing.T) {
 		assert.True(t, ok)
 		assert.Equal(t, "Wuriyanto", wury.FirstName)
 		assert.Equal(t, "Musobar", wury.LastName)
+		assert.Equal(t, 1, wury.Version)
 
 	})
 
@@ -51,6 +52,7 @@ func TestMemberRepositoryInMemory(t *testing.T) {
 
 		assert.Equal(t, "Wuriyanto", wury.FirstName)
 		assert.Equal(t, "Lone Wolf", wury.LastName)
+		assert.Equal(t, 2, wury.Version)
 
 	})
 
