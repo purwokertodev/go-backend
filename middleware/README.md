@@ -1,3 +1,3 @@
 # Middleware Folder
 
-Containt middleware files
+Contains all middleware files
