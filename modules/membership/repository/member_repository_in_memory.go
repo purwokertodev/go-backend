@@ -10,8 +10,8 @@ type MemberRepositoryInMemory struct {
 	db map[string]*model.Member
 }
 
-func NewMemberRepositoryInMemory() *MemberRepositoryInMemory {
-	return &MemberRepositoryInMemory{make(map[string]*model.Member)}
+func NewMemberRepositoryInMemory(db map[string]*model.Member) *MemberRepositoryInMemory {
+	return &MemberRepositoryInMemory{db}
 }
 
 func (r *MemberRepositoryInMemory) Save(m *model.Member) <-chan error {

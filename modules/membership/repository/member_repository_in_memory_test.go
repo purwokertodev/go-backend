@@ -8,7 +8,9 @@ import (
 
 func TestMemberRepositoryInMemory(t *testing.T) {
 
-	r := NewMemberRepositoryInMemory()
+	db := make(map[string]*model.Member)
+
+	r := NewMemberRepositoryInMemory(db)
 
 	t.Run("Save Member", func(t *testing.T) {
 		wury := model.NewMember()
