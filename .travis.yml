@@ -1,0 +1,17 @@
+language: go
+go:
+ - 1.7.x
+ - master
+
+addons:
+  apt:
+    sources:
+    - sourceline: ppa:masterminds/glide
+    packages:
+    - glide
+
+install:
+  - glide install
+
+script:
+ - make test
