@@ -3,10 +3,6 @@ go:
  - 1.7.x
  - master
 
-env:
-  global:
-    - CODECOV_TOKEN="1aadcc31-9144-4a63-b4b2-4f2af3222d41"
-
 addons:
   apt:
     sources:
@@ -20,4 +16,7 @@ install:
 
 script:
  - make test
- - set -e make cover
+ - make cover
+
+after_success:
+- bash <(curl -s https://codecov.io/bash)
