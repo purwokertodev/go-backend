@@ -5,6 +5,6 @@ type QueryResult struct {
 	Error  error
 }
 
-type MemberQuery interface {
+type MembershipQuery interface {
 	FindByEmail(email string) <-chan QueryResult
 }
