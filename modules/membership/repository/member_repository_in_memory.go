@@ -2,19 +2,20 @@ package repository
 
 import (
 	"errors"
-	"github.com/purwokertodev/go-backend/modules/membership/model"
 	"time"
+
+	"github.com/purwokertodev/go-backend/modules/membership/model"
 )
 
-type MemberRepositoryInMemory struct {
+type memberRepositoryInMemory struct {
 	db map[string]*model.Member
 }
 
-func NewMemberRepositoryInMemory(db map[string]*model.Member) *MemberRepositoryInMemory {
-	return &MemberRepositoryInMemory{db}
+func NewMemberRepositoryInMemory(db map[string]*model.Member) MembershipRepository {
+	return &memberRepositoryInMemory{db}
 }
 
-func (r *MemberRepositoryInMemory) Save(m *model.Member) <-chan error {
+func (r *memberRepositoryInMemory) Save(m *model.Member) <-chan error {
 	output := make(chan error)
 	go func() {
 		member, ok := r.db[m.ID]
@@ -34,7 +35,7 @@ func (r *MemberRepositoryInMemory) Save(m *model.Member) <-chan error {
 	return output
 }
 
-func (r *MemberRepositoryInMemory) Load(id string) <-chan RepositoryResult {
+func (r *memberRepositoryInMemory) Load(id string) <-chan RepositoryResult {
 	output := make(chan RepositoryResult)
 	go func() {
 		member, ok := r.db[id]
