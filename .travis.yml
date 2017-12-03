@@ -1,4 +1,5 @@
 language: go
+sudo: false
 go:
  - 1.7.x
  - master
@@ -15,8 +16,8 @@ install:
   - go get github.com/bookerzzz/gocovmerge
 
 script:
- - make test
- - make cover
+  - make test
+  - make cover
 
 after_success:
- - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
