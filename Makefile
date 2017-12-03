@@ -1,4 +1,4 @@
-.PHONY : test format
+.PHONY : test format cover
 
 format:
 	find . -name "*.go" -not -path "./vendor/*" -not -path ".git/*" | xargs gofmt -s -d -w
@@ -11,9 +11,9 @@ test: ./modules/membership/model ./modules/membership/repository ./modules/membe
 					./modules/auth/token \
 					./middleware
 
-cover: cover.txt
+cover: coverage.txt
 
-cover.txt: coverages/membership-model.txt coverages/membership-repo.txt  coverages/membership-quert.txt coverages/auth-token.txt coverages/middleware.txt
+coverage.txt: coverages/membership-model.txt coverages/membership-repo.txt  coverages/membership-quert.txt coverages/auth-token.txt coverages/middleware.txt
 	gocovmerge $^ > $@
 
 coverages/membership-model.txt:  $(shell find ./modules/membership/model -type f)
