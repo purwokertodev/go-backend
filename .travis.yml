@@ -5,7 +5,7 @@ go:
 
  env:
    global:
-     - CODECOV_TOKEN="1aadcc31-9144-4a63-b4b2-4f2af3222d41"
+   - CODECOV_TOKEN="1aadcc31-9144-4a63-b4b2-4f2af3222d41"
 
 addons:
   apt:

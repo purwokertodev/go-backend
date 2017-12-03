@@ -1,7 +1,6 @@
 # Go Backend
 
 [![codecov](https://codecov.io/gh/purwokertodev/go-backend/branch/master/graph/badge.svg)](https://codecov.io/gh/purwokertodev/go-backend)
-
 [![Build Status](https://travis-ci.org/purwokertodev/go-backend.svg?branch=master)](https://travis-ci.org/purwokertodev/go-backend)
 
 Build backend pure Go. this is repository example, how to build backend service without any framework
