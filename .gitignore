@@ -1,3 +1,7 @@
 
 # dependencies folder
 /vendor
+
+# coverage file and folder
+cover.txt
+coverages/*.txt
