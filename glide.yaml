@@ -4,3 +4,5 @@ import:
   version: v1.1.4
   subpackages:
   - assert
+- package: github.com/dgrijalva/jwt-go
+  version: v3.1.0
