@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/purwokertodev/go-backend.svg?branch=master)](https://travis-ci.org/purwokertodev/go-backend)
 [![codecov](https://codecov.io/gh/purwokertodev/go-backend/branch/master/graph/badge.svg)](https://codecov.io/gh/purwokertodev/go-backend)
 
-Build backend pure Go. this is repository example, how to build backend service without any framework
+Scaffolding, Boilerplate for Build backend pure Go.
 Base on Uncle Bob's awesome post https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html
 
 # This is What you need,,,,
