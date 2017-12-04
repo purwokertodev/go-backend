@@ -12,16 +12,16 @@ func TestMemberRepositoryInMemory(t *testing.T) {
 
 	db := make(map[string]*model.Member)
 
-	exampeMember := model.NewMember()
-	exampeMember.ID = "M1"
-	exampeMember.FirstName = "Wuriyanto"
-	exampeMember.LastName = "Musobar"
-	exampeMember.Email = "wuriyanto48@yahoo.co.id"
-	exampeMember.Password = "123456"
-	exampeMember.PasswordSalt = "salt"
-	exampeMember.BirthDate = time.Now()
+	exampleMember := model.NewMember()
+	exampleMember.ID = "M1"
+	exampleMember.FirstName = "Wuriyanto"
+	exampleMember.LastName = "Musobar"
+	exampleMember.Email = "wuriyanto48@yahoo.co.id"
+	exampleMember.Password = "123456"
+	exampleMember.PasswordSalt = "salt"
+	exampleMember.BirthDate = time.Now()
 
-	db["M1"] = exampeMember
+	db["M1"] = exampleMember
 
 	q := NewMemberQueryInMemory(db)
 

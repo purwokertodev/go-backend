@@ -23,7 +23,7 @@ func (q *memberQueryInMemory) FindByEmail(email string) <-chan QueryResult {
 				member = v
 				break
 			} else {
-				output <- QueryResult{Error: errors.New("Member not found")}
+				output <- QueryResult{Error: errors.New("MEMBER_NOT_FOUND")}
 				return
 			}
 		}
