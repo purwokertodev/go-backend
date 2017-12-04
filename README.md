@@ -19,7 +19,17 @@ Base on Uncle Bob's awesome post https://8thlight.com/blog/uncle-bob/2012/08/13/
     ```shell
     $ glide install
     ```
-# Running Test
+# Test
+
+  - Mocking
+    - we use https://github.com/vektra/mockery
+      ```shell
+        $ go get github.com/vektra/mockery
+      ```
+    - and mock some `interface`
+      ```shell
+      $ mockery -name=InterfaceName
+      ```
 
   - Unit test
     ```shell
