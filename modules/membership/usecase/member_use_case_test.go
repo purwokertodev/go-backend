@@ -74,32 +74,32 @@ func generateSaveFailMemberResult() <-chan error {
 
 func TestMembershipUseCase(t *testing.T) {
 
-	// t.Run("Test Save", func(t *testing.T) {
-	// 	mockMemberRepo := new(repoMocks.MembershipRepository)
-	// 	mockMemberQuery := new(queryMocks.MembershipQuery)
-	//
-	// 	exampleMember := model.NewMember()
-	// 	exampleMember.ID = "M1"
-	// 	exampleMember.FirstName = "Wuriyanto"
-	// 	exampleMember.LastName = "Musobar"
-	// 	exampleMember.Email = "wuriyanto48@yahoo.co.id"
-	// 	exampleMember.Password = "123456"
-	// 	exampleMember.PasswordSalt = "salt"
-	// 	exampleMember.BirthDate = time.Now()
-	//
-	// 	mockMemberQuery.On("FindByEmail", mock.AnythingOfType("string")).Return(generateFindByEmailFailMemberResult())
-	// 	mockMemberRepo.On("Save", mock.AnythingOfType("*model.Member")).Return(generateSaveSuccessMemberResult())
-	//
-	// 	defer mockMemberQuery.AssertCalled(t, "FindByEmail", mock.AnythingOfType("string"))
-	// 	defer mockMemberRepo.AssertCalled(t, "Save", mock.AnythingOfType("*model.Member"))
-	//
-	// 	uc := NewMemberUseCase(mockMemberRepo, mockMemberQuery)
-	//
-	// 	err := <-uc.Save(exampleMember)
-	//
-	// 	assert.NoError(t, err)
-	//
-	// })
+	t.Run("Test Save", func(t *testing.T) {
+		mockMemberRepo := new(repoMocks.MembershipRepository)
+		mockMemberQuery := new(queryMocks.MembershipQuery)
+
+		exampleMember := model.NewMember()
+		exampleMember.ID = "M1"
+		exampleMember.FirstName = "Wuriyanto"
+		exampleMember.LastName = "Musobar"
+		exampleMember.Email = "wuriyanto48@yahoo.co.id"
+		exampleMember.Password = "123456"
+		exampleMember.PasswordSalt = "salt"
+		exampleMember.BirthDate = time.Now()
+
+		mockMemberQuery.On("FindByEmail", mock.AnythingOfType("string")).Return(generateFindByEmailFailMemberResult())
+		mockMemberRepo.On("Save", mock.AnythingOfType("*model.Member")).Return(generateSaveSuccessMemberResult())
+
+		defer mockMemberQuery.AssertCalled(t, "FindByEmail", mock.AnythingOfType("string"))
+		defer mockMemberRepo.AssertCalled(t, "Save", mock.AnythingOfType("*model.Member"))
+
+		uc := NewMemberUseCase(mockMemberRepo, mockMemberQuery)
+
+		err := <-uc.Save(exampleMember)
+
+		assert.NoError(t, err)
+
+	})
 
 	t.Run("Find By Id", func(t *testing.T) {
 		mockMemberRepo := new(repoMocks.MembershipRepository)

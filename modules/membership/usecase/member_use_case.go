@@ -27,19 +27,19 @@ func (mu *memberUseCaseImpl) Save(m *model.Member) <-chan error {
 
 		memberExistResult := <-mu.memberQuery.FindByEmail(m.Email)
 
-		if memberExistResult.Error != nil && memberExistResult.Error.Error() == "MEMBER_NOT_FOUND" {
+		if memberExistResult.Error != nil && memberExistResult.Error.Error() != "MEMBER_NOT_FOUND" {
+			output <- memberExistResult.Error
+			return
+		} else if memberExistResult.Error != nil {
 			output <- memberExistResult.Error
 			return
 		} else {
-			output <- memberExistResult.Error
-			return
-		}
+			err := <-mu.memberRepository.Save(m)
 
-		err := <-mu.memberRepository.Save(m)
-
-		if err != nil {
-			output <- err
-			return
+			if err != nil {
+				output <- err
+				return
+			}
 		}
 
 		output <- nil
