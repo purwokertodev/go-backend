@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestMemberRepositoryInMemory(t *testing.T) {
+func TestMemberQueryInMemory(t *testing.T) {
 
 	db := make(map[string]*model.Member)
 
