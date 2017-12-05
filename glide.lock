@@ -1,22 +1,43 @@
-hash: 25aada6a35ec6c2faf37a9a6fc3896168a4dcb483d34a7c9f2ffbc472613c058
-updated: 2017-12-03T22:08:23.118640843+07:00
+hash: ed5c9b162d0675d52f71a9f3d346c450784771ce7957014262efd3e81f1271cd
+updated: 2017-12-06T00:00:51.307130115+07:00
 imports:
-- name: github.com/dgrijalva/jwt-go
-  version: dbeaa9332f19a944acb5736b4456cfcc02140e29
-- name: github.com/stretchr/testify
-  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
-  subpackages:
-  - assert
-- name: github.com/wuriyanto48/go-json-message
-  version: c71b1695450a6b7b200678ebaeb32be325bd10dd
-  subpackages:
-  - response
-testImports:
 - name: github.com/davecgh/go-spew
   version: 6d212800a42e8ab5c146b8ace3490ee17e5225f9
   subpackages:
   - spew
+- name: github.com/denisenkom/go-mssqldb
+  version: 84dc5e6cc4a674abe81be5bf7835f4ae3dced817
+- name: github.com/dgrijalva/jwt-go
+  version: dbeaa9332f19a944acb5736b4456cfcc02140e29
+- name: github.com/go-redis/redis
+  version: e5e021257bfc6d5fbf0beac33e30194311fb189f
+  subpackages:
+  - internal
+  - internal/consistenthash
+  - internal/hashtag
+  - internal/pool
+  - internal/proto
+- name: github.com/lib/pq
+  version: 8837942c3e09574accbc5f150e2c5e057189cace
+  subpackages:
+  - oid
 - name: github.com/pmezard/go-difflib
   version: d8ed2627bdf02c080bf22230dbb337003b7aba2d
   subpackages:
   - difflib
+- name: github.com/stretchr/objx
+  version: cbeaeb16a013161a98496fad62933b1d21786672
+- name: github.com/stretchr/testify
+  version: 69483b4bd14f5845b5a1e55bca19e954e827f1d0
+  subpackages:
+  - assert
+  - mock
+- name: golang.org/x/crypto
+  version: e7ba82683099cae71475961448ab8f903ea77c26
+  subpackages:
+  - md4
+- name: golang.org/x/net
+  version: 1a68b1313cf4ad7778376e82641197b60c02f65c
+  subpackages:
+  - context
+testImports: []

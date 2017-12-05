@@ -6,3 +6,7 @@ import:
   - assert
 - package: github.com/dgrijalva/jwt-go
   version: v3.1.0
+- package: github.com/lib/pq
+- package: github.com/denisenkom/go-mssqldb
+- package: github.com/go-redis/redis
+  version: v6.7.4
