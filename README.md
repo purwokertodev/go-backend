@@ -49,7 +49,7 @@ Base on Uncle Bob's awesome post https://8thlight.com/blog/uncle-bob/2012/08/13/
   ```
 
 # Authors
-  - Lone wolf https://github.com/wuriyanto48
+  - Lone Wolf https://github.com/wuriyanto48
 
 ##
 Purwokerto Dev 2017 :droplet:
