@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/purwokertodev/go-backend.svg?branch=master)](https://travis-ci.org/purwokertodev/go-backend)
 [![codecov](https://codecov.io/gh/purwokertodev/go-backend/branch/master/graph/badge.svg)](https://codecov.io/gh/purwokertodev/go-backend)
 
-Scaffolding, Boilerplate for Build backend pure Go.
+Scaffolding, Boilerplate with Clean Architecture, Testable, for Build backend pure Go.
 Base on Uncle Bob's awesome post https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html
 
 # This is What you need,,,,
