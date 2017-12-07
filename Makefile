@@ -3,7 +3,7 @@
 format:
 	find . -name "*.go" -not -path "./vendor/*" -not -path ".git/*" | xargs gofmt -s -d -w
 
-test: ./modules/membership/model ./modules/membership/repository ./modules/membership/query ./modules/membership/usecase ./modules/auth/query ./modules/auth/token ./middleware
+test: ./modules/membership/model ./modules/membership/repository ./modules/membership/query ./modules/membership/usecase ./modules/auth/query ./modules/auth/token ./middleware ./config
 	go test -race \
 					./modules/membership/model \
 					./modules/membership/repository \
@@ -11,11 +11,13 @@ test: ./modules/membership/model ./modules/membership/repository ./modules/membe
 					./modules/membership/usecase \
 					./modules/auth/query \
 					./modules/auth/token \
-					./middleware
+					./middleware \
+					./config
 
 cover: coverage.txt
 
-coverage.txt: coverages/membership-model.txt coverages/membership-repo.txt  coverages/membership-quert.txt coverages/membership-usecase.txt coverages/auth-query.txt coverages/auth-token.txt coverages/middleware.txt
+coverage.txt: coverages/membership-model.txt coverages/membership-repo.txt  coverages/membership-quert.txt \
+	coverages/membership-usecase.txt coverages/auth-query.txt coverages/auth-token.txt coverages/middleware.txt coverages/config.txt
 	gocovmerge $^ > $@
 
 coverages/membership-model.txt:  $(shell find ./modules/membership/model -type f)
@@ -38,3 +40,6 @@ coverages/auth-token.txt:  $(shell find ./modules/auth/token -type f)
 
 coverages/middleware.txt:  $(shell find ./middleware -type f)
 	go test -race -short -coverprofile=$@ -covermode=atomic ./middleware
+
+coverages/config.txt:  $(shell find ./config -type f)
+	go test -race -short -coverprofile=$@ -covermode=atomic ./config
