@@ -31,7 +31,7 @@ func (a *authUseCaseImpl) GetAccessToken(email, password string) <-chan UseCaseR
 			return
 		}
 
-		identity, ok := identityResult.Result.(model.Identity)
+		identity, ok := identityResult.Result.(*model.Identity)
 
 		if !ok {
 			output <- UseCaseResult{Error: errors.New("Invalid Identity")}

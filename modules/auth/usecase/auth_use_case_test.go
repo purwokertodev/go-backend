@@ -39,7 +39,7 @@ func generateQueryFindByEmailSuccessIdentityResult() <-chan query.QueryResult {
 		i.ID = "M1"
 		i.Email = "wuriyanto48@yahoo.co.id"
 		i.Password = "12345"
-		output <- query.QueryResult{Result: i}
+		output <- query.QueryResult{Result: &i}
 	}()
 	return output
 }
