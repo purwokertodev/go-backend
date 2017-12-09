@@ -1,7 +1,6 @@
 package model
 
 import (
-	"errors"
 	"time"
 )
 
@@ -25,11 +24,4 @@ func NewMember() *Member {
 		CreatedAt: now,
 		UpdatedAt: now,
 	}
-}
-
-func (m *Member) IsValidPassword(password string) error {
-	if m.Password != password {
-		return errors.New("Password is not valid")
-	}
-	return nil
 }
