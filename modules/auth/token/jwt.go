@@ -23,7 +23,20 @@ type AccessTokenResponse struct {
 	AccessToken *AccessToken
 }
 
-func GenerateAccessToken(signKey *rsa.PrivateKey, cl Claim, tokenAge time.Duration) <-chan AccessTokenResponse {
+type AccessTokenGenerator interface {
+	GenerateAccessToken(cl Claim) <-chan AccessTokenResponse
+}
+
+type jwtGenerator struct {
+	signKey  *rsa.PrivateKey
+	tokenAge time.Duration
+}
+
+func NewJwtGenerator(signKey *rsa.PrivateKey, tokenAge time.Duration) AccessTokenGenerator {
+	return &jwtGenerator{signKey: signKey, tokenAge: tokenAge}
+}
+
+func (j *jwtGenerator) GenerateAccessToken(cl Claim) <-chan AccessTokenResponse {
 	result := make(chan AccessTokenResponse)
 	go func() {
 		defer close(result)
@@ -31,12 +44,12 @@ func GenerateAccessToken(signKey *rsa.PrivateKey, cl Claim, tokenAge time.Durati
 		claims := make(jwt.MapClaims)
 		claims["iss"] = cl.Issuer
 		claims["aud"] = cl.Audience
-		claims["exp"] = time.Now().Add(tokenAge).Unix()
+		claims["exp"] = time.Now().Add(j.tokenAge).Unix()
 		claims["iat"] = time.Now().Unix()
 		claims["sub"] = cl.Subject
 		token.Claims = claims
 
-		tokenString, err := token.SignedString(signKey)
+		tokenString, err := token.SignedString(j.signKey)
 		if err != nil {
 			result <- AccessTokenResponse{Error: err, AccessToken: nil}
 			return

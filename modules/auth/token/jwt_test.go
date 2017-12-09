@@ -20,7 +20,9 @@ func TestGenerateJWT(t *testing.T) {
 
 		validPrivateKey, _ := getPrivateKey(PrivateKey)
 
-		tokenResult := <-GenerateAccessToken(validPrivateKey, claims, tokenAge)
+		gen := NewJwtGenerator(validPrivateKey, tokenAge)
+
+		tokenResult := <-gen.GenerateAccessToken(claims)
 
 		assert.NoError(t, tokenResult.Error)
 	})
