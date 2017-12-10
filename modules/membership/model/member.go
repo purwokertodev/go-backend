@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// Member model
 type Member struct {
 	ID           string
 	FirstName    string
@@ -17,6 +18,7 @@ type Member struct {
 	UpdatedAt    time.Time
 }
 
+// NewMember function for initialise Member model
 func NewMember() *Member {
 	now := time.Now()
 	return &Member{

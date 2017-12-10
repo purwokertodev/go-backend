@@ -6,14 +6,17 @@ import (
 	"github.com/purwokertodev/go-backend/modules/membership/model"
 )
 
+// memberQueryInMemory model
 type memberQueryInMemory struct {
 	db map[string]*model.Member
 }
 
+// NewMemberQueryInMemory for initialise memberQueryInMemory model
 func NewMemberQueryInMemory(db map[string]*model.Member) MembershipQuery {
 	return &memberQueryInMemory{db}
 }
 
+// FindByEmail will return Member by its email
 func (q *memberQueryInMemory) FindByEmail(email string) <-chan QueryResult {
 	output := make(chan QueryResult)
 	go func() {

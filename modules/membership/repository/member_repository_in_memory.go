@@ -7,14 +7,17 @@ import (
 	"github.com/purwokertodev/go-backend/modules/membership/model"
 )
 
+// memberRepositoryInMemory model
 type memberRepositoryInMemory struct {
 	db map[string]*model.Member
 }
 
+// NewMemberRepositoryInMemory for initialise memberRepositoryInMemory model
 func NewMemberRepositoryInMemory(db map[string]*model.Member) MembershipRepository {
 	return &memberRepositoryInMemory{db}
 }
 
+// Save function for saving Member model
 func (r *memberRepositoryInMemory) Save(m *model.Member) <-chan error {
 	output := make(chan error)
 	go func() {
@@ -35,6 +38,7 @@ func (r *memberRepositoryInMemory) Save(m *model.Member) <-chan error {
 	return output
 }
 
+// Load for load Member by its ID
 func (r *memberRepositoryInMemory) Load(id string) <-chan RepositoryResult {
 	output := make(chan RepositoryResult)
 	go func() {

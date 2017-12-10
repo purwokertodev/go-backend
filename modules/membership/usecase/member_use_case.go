@@ -8,11 +8,13 @@ import (
 	"github.com/purwokertodev/go-backend/modules/membership/repository"
 )
 
+// memberUseCaseImpl model
 type memberUseCaseImpl struct {
 	memberRepository repository.MembershipRepository
 	memberQuery      query.MembershipQuery
 }
 
+// NewMemberUseCase for initialise memberUseCaseImpl model
 func NewMemberUseCase(memberRepository repository.MembershipRepository, memberQuery query.MembershipQuery) MemberUseCase {
 	return &memberUseCaseImpl{
 		memberRepository: memberRepository,
@@ -20,6 +22,7 @@ func NewMemberUseCase(memberRepository repository.MembershipRepository, memberQu
 	}
 }
 
+// Save for saving Member model
 func (mu *memberUseCaseImpl) Save(m *model.Member) <-chan error {
 	output := make(chan error)
 
@@ -49,6 +52,7 @@ func (mu *memberUseCaseImpl) Save(m *model.Member) <-chan error {
 	return output
 }
 
+// FindByID for load Member by its ID
 func (mu *memberUseCaseImpl) FindByID(id string) <-chan UseCaseResult {
 	output := make(chan UseCaseResult)
 
@@ -74,6 +78,7 @@ func (mu *memberUseCaseImpl) FindByID(id string) <-chan UseCaseResult {
 	return output
 }
 
+// FindByEmail for load Member by its Email
 func (mu *memberUseCaseImpl) FindByEmail(email string) <-chan UseCaseResult {
 	output := make(chan UseCaseResult)
 
