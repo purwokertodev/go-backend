@@ -17,6 +17,7 @@ var (
 	signKey   *rsa.PrivateKey
 )
 
+// InitPublicKey return *rsa.PublicKey
 func InitPublicKey() (*rsa.PublicKey, error) {
 	verifyBytes, err := ioutil.ReadFile(publicKeyPath)
 	if err != nil {
@@ -30,6 +31,7 @@ func InitPublicKey() (*rsa.PublicKey, error) {
 	return verifyKey, nil
 }
 
+// InitPrivateKey return *rsa.PrivateKey
 func InitPrivateKey() (*rsa.PrivateKey, error) {
 	signBytes, err := ioutil.ReadFile(privateKeyPath)
 	if err != nil {
