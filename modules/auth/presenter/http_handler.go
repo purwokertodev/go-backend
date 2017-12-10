@@ -74,6 +74,7 @@ func (h *HttpAuthHandler) Auth() http.Handler {
 	})
 }
 
+// jsonResponse function for Marshal and format response using Json
 func jsonResponse(res http.ResponseWriter, resp interface{}, httpCode int) {
 	msg, _ := json.Marshal(resp)
 	res.Header().Set("Content-Type", "application-json; charset=utf-8")

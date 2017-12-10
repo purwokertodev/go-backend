@@ -16,7 +16,7 @@ func NewIdentityQueryInMemory(db map[string]*model.Identity) IdentityQuery {
 	return &identityQueryInMemory{db}
 }
 
-// FindByEmail function return Identity by its ID
+// FindByEmail function return Identity by its Email
 func (q *identityQueryInMemory) FindByEmail(email string) <-chan QueryResult {
 	output := make(chan QueryResult)
 	go func() {
