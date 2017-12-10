@@ -6,16 +6,16 @@ import (
 
 // Member model
 type Member struct {
-	ID           string
-	FirstName    string
-	LastName     string
-	Email        string
-	Password     string
-	PasswordSalt string
-	BirthDate    time.Time
-	Version      int
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	ID           string    `json:"ID"`
+	FirstName    string    `json:"firstName"`
+	LastName     string    `json:"lastName"`
+	Email        string    `json:"email"`
+	Password     string    `json:"password"`
+	PasswordSalt string    `json:"passwordSalt"`
+	BirthDate    time.Time `json:"birthDate"`
+	Version      int       `json:"version"`
+	CreatedAt    time.Time `json:"createdAt"`
+	UpdatedAt    time.Time `json:"updatedAt"`
 }
 
 // NewMember function for initialise Member model
