@@ -6,6 +6,7 @@ import (
 	"github.com/purwokertodev/go-backend/modules/membership/model"
 )
 
+// GetInMemoryDb return *model.Member map, this fake database just for testing purposes only
 func GetInMemoryDb() map[string]*model.Member {
 	db := make(map[string]*model.Member)
 

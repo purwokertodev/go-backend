@@ -8,6 +8,7 @@ import (
 	"github.com/go-redis/redis"
 )
 
+// GetRedis return *redis.Client
 func GetRedis(redisHost, redisTLS, redisPassword, redisPort string) (*redis.Client, error) {
 	tlsSecured, err := strconv.ParseBool(redisTLS)
 

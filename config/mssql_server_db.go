@@ -8,6 +8,7 @@ import (
 	_ "github.com/denisenkom/go-mssqldb"
 )
 
+// mssqlDB global var
 var mssqlDB *sql.DB
 
 // GetMsSQLDB function for creating database connection from MSSQL Database

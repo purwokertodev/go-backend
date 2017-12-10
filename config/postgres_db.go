@@ -8,6 +8,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
+//postgresDB global var
 var postgresDB *sql.DB
 
 // GetPostgresDB function for creating database connection from Postgres Database
