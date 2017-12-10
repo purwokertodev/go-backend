@@ -8,11 +8,13 @@ import (
 	"github.com/purwokertodev/go-backend/modules/auth/token"
 )
 
+// authUseCaseImpl model
 type authUseCaseImpl struct {
 	identityQuery        query.IdentityQuery
 	accessTokenGenerator token.AccessTokenGenerator
 }
 
+// NewAuthUseCase function for initialise authUseCaseImpl model
 func NewAuthUseCase(identityQuery query.IdentityQuery, accessTokenGenerator token.AccessTokenGenerator) AuthUseCase {
 	return &authUseCaseImpl{
 		identityQuery:        identityQuery,
@@ -20,6 +22,7 @@ func NewAuthUseCase(identityQuery query.IdentityQuery, accessTokenGenerator toke
 	}
 }
 
+// GetAccessToken function will return accessToken that created from Identity ID
 func (a *authUseCaseImpl) GetAccessToken(email, password string) <-chan UseCaseResult {
 	output := make(chan UseCaseResult)
 

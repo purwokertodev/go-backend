@@ -9,14 +9,17 @@ import (
 	"github.com/purwokertodev/go-backend/modules/auth/usecase"
 )
 
+// HttpAuthHandler model
 type HttpAuthHandler struct {
 	AuthUseCase usecase.AuthUseCase
 }
 
+// NewHttpHandler function for initialise *HttpAuthHandler
 func NewHttpHandler(authUseCase usecase.AuthUseCase) *HttpAuthHandler {
 	return &HttpAuthHandler{AuthUseCase: authUseCase}
 }
 
+// Auth function, this http handler for user login and getting accessToken
 func (h *HttpAuthHandler) Auth() http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 

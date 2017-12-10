@@ -6,14 +6,17 @@ import (
 	"github.com/purwokertodev/go-backend/modules/auth/model"
 )
 
+// identityQueryInMemory model, this private model implement IdentityQuery
 type identityQueryInMemory struct {
 	db map[string]*model.Identity
 }
 
+// NewIdentityQueryInMemory function for initialise identityQueryInMemory model
 func NewIdentityQueryInMemory(db map[string]*model.Identity) IdentityQuery {
 	return &identityQueryInMemory{db}
 }
 
+// FindByEmail function return Identity by its ID
 func (q *identityQueryInMemory) FindByEmail(email string) <-chan QueryResult {
 	output := make(chan QueryResult)
 	go func() {

@@ -8,34 +8,41 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+// Claim model
 type Claim struct {
 	Issuer   string
 	Audience string
 	Subject  string
 }
 
+// AccessToken model
 type AccessToken struct {
 	Token string `json:"access_token"`
 }
 
+// AccessTokenResponse response model
 type AccessTokenResponse struct {
 	Error       error
 	AccessToken *AccessToken
 }
 
+// AccessTokenGenerator interface
 type AccessTokenGenerator interface {
 	GenerateAccessToken(cl Claim) <-chan AccessTokenResponse
 }
 
+// jwtGenerator private model
 type jwtGenerator struct {
 	signKey  *rsa.PrivateKey
 	tokenAge time.Duration
 }
 
+// NewJwtGenerator function for initialise jwtGenerator object
 func NewJwtGenerator(signKey *rsa.PrivateKey, tokenAge time.Duration) AccessTokenGenerator {
 	return &jwtGenerator{signKey: signKey, tokenAge: tokenAge}
 }
 
+// GenerateAccessToken function will return accessToken
 func (j *jwtGenerator) GenerateAccessToken(cl Claim) <-chan AccessTokenResponse {
 	result := make(chan AccessTokenResponse)
 	go func() {
