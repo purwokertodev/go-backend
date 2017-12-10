@@ -3,13 +3,14 @@
 format:
 	find . -name "*.go" -not -path "./vendor/*" -not -path ".git/*" | xargs gofmt -s -d -w
 
-test: ./modules/membership/model ./modules/membership/repository ./modules/membership/query ./modules/membership/usecase ./modules/auth/model \
+test: ./modules/membership/model ./modules/membership/repository ./modules/membership/query ./modules/membership/usecase ./modules/membership/presenter ./modules/auth/model \
 	 ./modules/auth/query ./modules/auth/token ./modules/auth/usecase ./middleware ./config
 	go test -race \
 					./modules/membership/model \
 					./modules/membership/repository \
 					./modules/membership/query \
 					./modules/membership/usecase \
+					./modules/membership/presenter \
 					./modules/auth/model \
 					./modules/auth/query \
 					./modules/auth/token \
@@ -20,7 +21,8 @@ test: ./modules/membership/model ./modules/membership/repository ./modules/membe
 cover: coverage.txt
 
 coverage.txt: coverages/membership-model.txt coverages/membership-repo.txt  coverages/membership-quert.txt \
-	coverages/membership-usecase.txt coverages/auth-model.txt coverages/auth-query.txt coverages/auth-token.txt coverages/auth-usecase.txt coverages/middleware.txt coverages/config.txt
+	coverages/membership-usecase.txt coverages/membership-presenter.txt coverages/auth-model.txt coverages/auth-query.txt \
+	coverages/auth-token.txt coverages/auth-usecase.txt coverages/middleware.txt coverages/config.txt
 	gocovmerge $^ > $@
 
 coverages/membership-model.txt:  $(shell find ./modules/membership/model -type f)
@@ -34,6 +36,9 @@ coverages/membership-quert.txt:  $(shell find ./modules/membership/query -type f
 
 coverages/membership-usecase.txt:  $(shell find ./modules/membership/usecase -type f)
 	go test -race -short -coverprofile=$@ -covermode=atomic ./modules/membership/usecase
+
+coverages/membership-presenter.txt:  $(shell find ./modules/membership/presenter -type f)
+	go test -race -short -coverprofile=$@ -covermode=atomic ./modules/membership/presenter
 
 coverages/auth-model.txt:  $(shell find ./modules/auth/model -type f)
 	go test -race -short -coverprofile=$@ -covermode=atomic ./modules/auth/model
