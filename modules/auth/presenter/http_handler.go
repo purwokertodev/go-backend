@@ -7,6 +7,7 @@ import (
 	"github.com/purwokertodev/go-backend/modules/auth/model"
 	"github.com/purwokertodev/go-backend/modules/auth/token"
 	"github.com/purwokertodev/go-backend/modules/auth/usecase"
+	"github.com/purwokertodev/go-backend/utils"
 )
 
 // HttpAuthHandler model
@@ -24,14 +25,14 @@ func (h *HttpAuthHandler) Auth() http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
 
 		if req.Method != "POST" {
-			jsonResponse(res, "Invalid Method", http.StatusMethodNotAllowed)
+			utils.JsonResponse(res, "Invalid Method", http.StatusMethodNotAllowed)
 			return
 		}
 
 		grantTypes, ok := req.URL.Query()["grant_type"]
 
 		if !ok || len(grantTypes) < 1 {
-			jsonResponse(res, "Missing Grant Type", http.StatusBadRequest)
+			utils.JsonResponse(res, "Missing Grant Type", http.StatusBadRequest)
 			return
 		}
 
@@ -47,37 +48,29 @@ func (h *HttpAuthHandler) Auth() http.Handler {
 			err := decoder.Decode(&identityLogin)
 
 			if err != nil {
-				jsonResponse(res, "Error occured", http.StatusInternalServerError)
+				utils.JsonResponse(res, "Error occured", http.StatusInternalServerError)
 				return
 			}
 
 			accessTokenResult := <-h.AuthUseCase.GetAccessToken(identityLogin.Email, identityLogin.Password)
 
 			if accessTokenResult.Error != nil {
-				jsonResponse(res, "Invalid username or password", http.StatusUnauthorized)
+				utils.JsonResponse(res, "Invalid username or password", http.StatusUnauthorized)
 				return
 			}
 
 			accessToken, ok := accessTokenResult.Result.(*token.AccessToken)
 
 			if !ok {
-				jsonResponse(res, "Invalid username or password", http.StatusUnauthorized)
+				utils.JsonResponse(res, "Invalid username or password", http.StatusUnauthorized)
 				return
 			}
 
-			jsonResponse(res, accessToken, http.StatusOK)
+			utils.JsonResponse(res, accessToken, http.StatusOK)
 			return
 		default:
-			jsonResponse(res, "Invalid Grant Type", http.StatusBadRequest)
+			utils.JsonResponse(res, "Invalid Grant Type", http.StatusBadRequest)
 			return
 		}
 	})
-}
-
-// jsonResponse function for Marshal and format response using Json
-func jsonResponse(res http.ResponseWriter, resp interface{}, httpCode int) {
-	msg, _ := json.Marshal(resp)
-	res.Header().Set("Content-Type", "application-json; charset=utf-8")
-	res.WriteHeader(httpCode)
-	res.Write(msg)
 }
