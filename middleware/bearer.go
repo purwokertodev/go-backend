@@ -8,6 +8,7 @@ import (
 	jwt "github.com/dgrijalva/jwt-go"
 )
 
+// Bearer this middleware function for verifying accessToken from Authorization Header
 func Bearer(verifyKey *rsa.PublicKey, next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
