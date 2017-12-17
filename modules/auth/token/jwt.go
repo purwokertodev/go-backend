@@ -17,7 +17,7 @@ type Claim struct {
 
 // AccessToken model
 type AccessToken struct {
-	Token string `json:"access_token"`
+	Token string `json:"accessToken"`
 }
 
 // AccessTokenResponse response model
