@@ -139,7 +139,7 @@
 
     func main() {
     	authEmail := "wuriyanto007@gmail.com"
-    	authPassword := "sudahlah"
+    	authPassword := "your email password"
     	authHost := "smtp.gmail.com"
     	address := "smtp.gmail.com:587"
     	to := []string{"wuriyanto48@yahoo.co.id"}
