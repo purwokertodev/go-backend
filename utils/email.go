@@ -23,6 +23,7 @@ type email struct {
 // EmailSender interface
 type EmailSender interface {
 	Send() (bool, error)
+	ParseTemplate(templateFileName string, data interface{}) error
 }
 
 // NewEmail function, for initialize email model
@@ -43,7 +44,7 @@ func (e *email) Send() (bool, error) {
 	//setup auth
 	auth := smtp.PlainAuth("", e.authEmail, e.authPassword, e.authHost)
 
-	mime := "MIME-version: 1.0;\nContent-Type: text/plain; charset=\"UTF-8\";\n\n"
+	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
 	subject := "Subject: " + e.subject + "!\n"
 	msg := []byte(subject + mime + "\n" + e.body)
 
