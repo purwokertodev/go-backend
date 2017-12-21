@@ -22,8 +22,8 @@ type email struct {
 
 // EmailSender interface
 type EmailSender interface {
-	Send() (bool, error)
-	ParseTemplate(templateFileName string, data interface{}) error
+	Send() error
+	SetTemplate(templateFile string, data interface{}) error
 }
 
 // NewEmail function, for initialize email model
@@ -40,7 +40,7 @@ func NewEmail(to []string, address, from, subject, body, authEmail, authPassword
 }
 
 // Send function, for send email
-func (e *email) Send() (bool, error) {
+func (e *email) Send() error {
 	//setup auth
 	auth := smtp.PlainAuth("", e.authEmail, e.authPassword, e.authHost)
 
@@ -49,14 +49,14 @@ func (e *email) Send() (bool, error) {
 	msg := []byte(subject + mime + "\n" + e.body)
 
 	if err := smtp.SendMail(e.address, auth, e.from, e.to, msg); err != nil {
-		return false, err
+		return err
 	}
-	return true, nil
+	return nil
 }
 
 // ParseTemplate function for parse template to email body
-func (e *email) ParseTemplate(templateFileName string, data interface{}) error {
-	t, err := template.ParseFiles(templateFileName)
+func (e *email) SetTemplate(templateFile string, data interface{}) error {
+	t, err := template.ParseFiles(templateFile)
 	if err != nil {
 		return err
 	}
