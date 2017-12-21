@@ -132,7 +132,6 @@
 
     ```go
     import (
-    	"errors"
     	"fmt"
 
     	"github.com/purwokertodev/go-backend/utils"
@@ -140,7 +139,7 @@
 
     func main() {
     	authEmail := "wuriyanto007@gmail.com"
-    	authPassword := "your email password"
+    	authPassword := "sudahlah"
     	authHost := "smtp.gmail.com"
     	address := "smtp.gmail.com:587"
     	to := []string{"wuriyanto48@yahoo.co.id"}
@@ -157,21 +156,25 @@
     		URL:      "wuriyanto.com",
     	}
 
-    	if err := email.ParseTemplate("email_template.html", emailData); err == nil {
-    		err = execute(email)
-    		if err != nil {
-    			fmt.Println(err)
-    		}
-    		fmt.Println("email sent")
+    	err := execute(email, "email_template.html", emailData)
+    	if err != nil {
+    		fmt.Println(err)
     	}
+    	fmt.Println("email sent")
 
     }
 
-    func execute(u utils.EmailSender) error {
-    	ok, _ := u.Send()
-    	if !ok {
-    		return errors.New("Fail send email")
+    func execute(u utils.EmailSender, fileName string, data interface{}) error {
+    	err := u.SetTemplate(fileName, data)
+    	if err != nil {
+    		return err
     	}
+
+    	err = u.Send()
+    	if err != nil {
+    		return err
+    	}
+
     	return nil
     }
     ```
