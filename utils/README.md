@@ -47,56 +47,131 @@
   }
   ```
 
-- `GET`
-  ```go
-  package main
+  - `GET`
 
-  import (
-  	"fmt"
+    ```go
+    package main
 
-  	"github.com/purwokertodev/go-backend/utils"
-  )
+    import (
+    	"fmt"
 
-  type User struct {
-  	ID       int    `json:"id"`
-  	Name     string `json:"name"`
-  	Username string `json:"username"`
-  	Email    string `json:"email"`
-  	Address  struct {
-  		Street  string `json:"street"`
-  		Suite   string `json:"suite"`
-  		City    string `json:"city"`
-  		Zipcode string `json:"zipcode"`
-  		Geo     struct {
-  			Lat string `json:"lat"`
-  			Lng string `json:"lng"`
-  		} `json:"geo"`
-  	} `json:"address"`
-  	Phone   string `json:"phone"`
-  	Website string `json:"website"`
-  	Company struct {
-  		Name        string `json:"name"`
-  		CatchPhrase string `json:"catchPhrase"`
-  		Bs          string `json:"bs"`
-  	} `json:"company"`
-  }
+    	"github.com/purwokertodev/go-backend/utils"
+    )
 
-  type Users []User
+    type User struct {
+    	ID       int    `json:"id"`
+    	Name     string `json:"name"`
+    	Username string `json:"username"`
+    	Email    string `json:"email"`
+    	Address  struct {
+    		Street  string `json:"street"`
+    		Suite   string `json:"suite"`
+    		City    string `json:"city"`
+    		Zipcode string `json:"zipcode"`
+    		Geo     struct {
+    			Lat string `json:"lat"`
+    			Lng string `json:"lng"`
+    		} `json:"geo"`
+    	} `json:"address"`
+    	Phone   string `json:"phone"`
+    	Website string `json:"website"`
+    	Company struct {
+    		Name        string `json:"name"`
+    		CatchPhrase string `json:"catchPhrase"`
+    		Bs          string `json:"bs"`
+    	} `json:"company"`
+    }
 
-  func main() {
-  	var users Users
+    type Users []User
 
-  	req := utils.NewRequest(10)
+    func main() {
+    	var users Users
 
-  	headers := make(map[string]string)
-  	headers["Content-Type"] = "application/json"
-  	headers["Accept"] = "application/json"
+    	req := utils.NewRequest(10)
 
-  	err := req.Req("GET", "https://jsonplaceholder.typicode.com/users", nil, &users, headers)
-  	if err != nil {
-  		fmt.Println(err)
-  	}
+    	headers := make(map[string]string)
+    	headers["Content-Type"] = "application/json"
+    	headers["Accept"] = "application/json"
 
-  	fmt.Println(users)
-  }
-  ```
+    	err := req.Req("GET", "https://jsonplaceholder.typicode.com/users", nil, &users, headers)
+    	if err != nil {
+    		fmt.Println(err)
+    	}
+
+    	fmt.Println(users)
+    }
+    ```
+
+## Email
+
+### Usage
+
+  - Html Email Template
+
+    ```html
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html>
+
+    </head>
+
+    <body>
+    <p>
+        Hi {{.Username}}
+        <h4>Your Account Registration Success</h4>
+        <p>Please follow link bellow, to complete your Registration</p>
+        <a href="{{.URL}}">Confirm email address</a>
+    </p>
+
+    </body>
+
+    </html>
+    ```
+
+  - Golang Code
+
+    ```go
+    import (
+    	"errors"
+    	"fmt"
+
+    	"github.com/purwokertodev/go-backend/utils"
+    )
+
+    func main() {
+    	authEmail := "wuriyanto007@gmail.com"
+    	authPassword := "your email password"
+    	authHost := "smtp.gmail.com"
+    	address := "smtp.gmail.com:587"
+    	to := []string{"wuriyanto48@yahoo.co.id"}
+    	from := "wuriyanto007@gmail.com"
+    	subject := "Golang email"
+    	body := "Golang email sent..."
+    	email := utils.NewEmail(to, address, from, subject, body, authEmail, authPassword, authHost)
+
+    	emailData := struct {
+    		Username string
+    		URL      string
+    	}{
+    		Username: "Wuriyanto",
+    		URL:      "wuriyanto.com",
+    	}
+
+    	if err := email.ParseTemplate("email_template.html", emailData); err == nil {
+    		err = execute(email)
+    		if err != nil {
+    			fmt.Println(err)
+    		}
+    		fmt.Println("email sent")
+    	}
+
+    }
+
+    func execute(u utils.EmailSender) error {
+    	ok, _ := u.Send()
+    	if !ok {
+    		return errors.New("Fail send email")
+    	}
+    	return nil
+    }
+    ```
