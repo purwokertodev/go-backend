@@ -4,6 +4,10 @@ go:
   - 1.10.x
   - master
 
+install:
+  - go mod download
+  - go get github.com/bookerzzz/gocovmerge
+
 script:
   - make test
   - make cover
