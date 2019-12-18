@@ -11,17 +11,9 @@ Base on Uncle Bob's awesome post https://8thlight.com/blog/uncle-bob/2012/08/13/
 
 # This is What you need,,,,
 
-  - Golang version 1.7+
-  - Glide; click https://github.com/Masterminds/glide
+  - Golang version 1.10+
   - Go Coverage Merge; click https://github.com/bookerzzz/gocovmerge
 
-# Dealing with dependency, we are using Glide of course
-
-  - Install Glide https://github.com/Masterminds/glide
-  - Install Dependecies
-    ```shell
-    $ glide install
-    ```
 # Test
 
   - Mocking
